@@ -136,7 +136,7 @@ describe('applyMatrix', () => {
     expect(pts[1][0]).toBeCloseTo(4);
   });
 
-  it('supports 2x2 matrix', () => {
+  it('supports 4x4 matrix', () => {
     const vm = new VMobject();
     vm.setPoints([
       [1, 0, 0],
@@ -144,17 +144,17 @@ describe('applyMatrix', () => {
       [3, 0, 0],
       [4, 0, 0],
     ]);
-    // 2x2 scaling matrix: scale x by 2, y by 3
-    const matrix2 = [
-      [2, 0],
-      [0, 3],
+    // 4x4 identity with translation in x
+    const matrix4 = [
+      [1, 0, 0, 5],
+      [0, 1, 0, 0],
+      [0, 0, 1, 0],
+      [0, 0, 0, 1],
     ];
-    vm.applyMatrix(matrix2);
+    vm.applyMatrix(matrix4);
     const pts = vm.getPoints();
-    expect(pts[0][0]).toBeCloseTo(2);
-    expect(pts[0][1]).toBeCloseTo(0);
-    expect(pts[1][0]).toBeCloseTo(4);
-    expect(pts[1][1]).toBeCloseTo(0);
+    expect(pts[0][0]).toBeCloseTo(6);
+    expect(pts[1][0]).toBeCloseTo(7);
   });
 
   it('returns this for chaining', () => {
